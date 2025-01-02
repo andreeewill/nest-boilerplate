@@ -8,7 +8,8 @@ on:
 
 jobs:
 
-  test:
+  Test:
+    name: Unit test and linter
     runs-on: ubuntu-latest
 
     steps:
@@ -17,10 +18,17 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run Jest tests
+    - name: Run ESLint
+      run: npm run lint
+
+    - name: Run Unit test
       run: npm run test
 
-  build:
+    - name: Run Coverage
+      run: npm run test:cov
+
+  Build:
+    name: Containerize Docker Image
     needs: [ test ]
     runs-on: ubuntu-latest
 
